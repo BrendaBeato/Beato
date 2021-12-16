@@ -1,4 +1,5 @@
                              //BIBLIOTECAS DECLARADAS
+                             //BIBLIOTECAS DECLARADAS
 #include<stdio.h>
 #include<locale.h>
 #include<string.h> 
@@ -24,28 +25,28 @@ void cadastrar(){
 	cadastro.arq = fopen("func.txt", "a"); //DECLARAÇÃO DO ARQUIVO PARA ARMAZENAR OS DADOS DO CADASTRO
 	
 	do{
-		fflush(stdin); //função p limpar o buffer de saída/entrada
+	//	fflush(stdin); //função p limpar o buffer de saída/entrada
 		printf("Digite o nome e sobrenome do funcionário:");
-		gets(cadastro.nome);
+		scanf( "%s", cadastro.nome);
 		fprintf(cadastro.arq, "Nome - %s\n", cadastro.nome);//COMANDO P ARMAZENAMENTO NO ARQUIVO
 		printf("Digite sua profissão:");
-		gets(cadastro.profissao);
+		scanf("%s", cadastro.profissao);
 		fprintf(cadastro.arq, "Profissão - %s\n", cadastro.profissao);
 		printf("Digite o cpf:");
-		gets(cadastro.cpf);
+		scanf("%s", cadastro.cpf);
 		fprintf(cadastro.arq, "Cpf - %s\n", cadastro.cpf);
 		fprintf(cadastro.arq,"\n-------------------------------\n"); //organizar o arquivo
 		printf("\nQuer continuar? [S/N]:");
-		gets(cadastro.continuar);
+		scanf("%s", cadastro.continuar);
 	
 		if(strcmp(cadastro.continuar,"s") == 0){
 			printf("Ok vamos continuar...");
-			system ("cls");
+			//system ("cls");
 		}
 		
 	}while(strcmp(cadastro.continuar,"s") == 0);
 	fclose(cadastro.arq);
-	system ("cls");
+	//system ("cls");
 }
 
                                 //ESPECIFICANDO A FUNÇÃO DE LISTAR
@@ -62,26 +63,33 @@ while(fgets(listas,200,cadastro.arq)!=NULL){
 
 }
 fclose(cadastro.arq);
-system("pause"); 
-system ("cls");
+//system("pause"); 
+//system ("cls");
 }
 
 void buscar(){
 cadastro.arq = fopen("func.txt", "rb");
-
+char listas[200];
 
 printf("*-----------------------------------------------------------------------*\n");
 printf("|                       BUSCAR FUNCIONÁRIO                              |\n");
 printf("*-----------------------------------------------------------------------*\n\n\n ");
 printf("Por favor,informe o nome do funcionário que deseja buscar:\n");
-fflush(stdin);
-scanf("%s",cadastro.buscar);
+//fflush(stdin);
+scanf("%s", cadastro.buscar);
 
+while(fgets(listas,200, cadastro.arq)!=NULL){ 
+    
+    if(strstr(listas,cadastro.buscar)!=NULL){
 
+	printf("%s",listas); //printf p imprimir a lista na tela
+	
+    }
+}
 
 fclose(cadastro.arq);
-system("pause"); 
-system ("cls");
+//system("pause"); 
+//system ("cls");
 }
 
 
@@ -146,20 +154,20 @@ do{
 	switch(cadastro.opcao){    
 		case 1:
 			printf(" Processando...");
-			Sleep(2000);
-			system("cls");
+		//	Sleep(2000);
+			//system("cls");
 			cadastrar();
 	    	break;
 	    case 2:
 	        printf(" Processando...");
-			Sleep(2000);
-			system("cls");
+		//	Sleep(2000);
+			//system("cls");
 			listar();
 	    	break;
 	    case 3:
 	        printf(" Processando...");
-			Sleep(2000);
-			system("cls");
+		//	Sleep(2000);
+		//	system("cls");
 			buscar();
 	        break;
 	    //case 4:
@@ -185,5 +193,8 @@ do{
                                                                
    }while(cadastro.opcao!=0);
    printf(" Processando...");
-   Sleep(1000);
-   printf("\n-------------VOLTE SEMPRE!!---------------"); //MENSAGEM DE SAÍDA DO PROGRAMA
+   //  Sleep(1000);
+   printf("-------------VOLTE SEMPRE!!---------------"); //MENSAGEM DE SAÍDA DO PROGRAMA
+}
+
+
