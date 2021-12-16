@@ -1,0 +1,189 @@
+                             //BIBLIOTECAS DECLARADAS
+#include<stdio.h>
+#include<locale.h>
+#include<string.h> 
+#include<stdlib.h>
+
+                            //DECLARANDO VARIAVEIS DO CADASTRO EM STRUCT
+struct cadastramento{
+	
+	FILE *arq; 
+	char nome[100];
+	char profissao[100];
+ 	char cpf[100];
+	char continuar[1];
+	char buscar[100];
+	int opcao;
+	
+	
+}cadastro;
+
+                            //ESPECIFICANDO A FUNÇÃO DE CADASTRO
+void cadastrar(){
+	
+	cadastro.arq = fopen("func.txt", "a"); //DECLARAÇÃO DO ARQUIVO PARA ARMAZENAR OS DADOS DO CADASTRO
+	
+	do{
+		fflush(stdin); //função p limpar o buffer de saída/entrada
+		printf("Digite o nome e sobrenome do funcionário:");
+		gets(cadastro.nome);
+		fprintf(cadastro.arq, "Nome - %s\n", cadastro.nome);//COMANDO P ARMAZENAMENTO NO ARQUIVO
+		printf("Digite sua profissão:");
+		gets(cadastro.profissao);
+		fprintf(cadastro.arq, "Profissão - %s\n", cadastro.profissao);
+		printf("Digite o cpf:");
+		gets(cadastro.cpf);
+		fprintf(cadastro.arq, "Cpf - %s\n", cadastro.cpf);
+		fprintf(cadastro.arq,"\n-------------------------------\n"); //organizar o arquivo
+		printf("\nQuer continuar? [S/N]:");
+		gets(cadastro.continuar);
+	
+		if(strcmp(cadastro.continuar,"s") == 0){
+			printf("Ok vamos continuar...");
+			system ("cls");
+		}
+		
+	}while(strcmp(cadastro.continuar,"s") == 0);
+	fclose(cadastro.arq);
+	system ("cls");
+}
+
+                                //ESPECIFICANDO A FUNÇÃO DE LISTAR
+void listar(){
+	
+cadastro.arq = fopen("func.txt", "r");
+int i;
+char listas[200];
+
+
+while(fgets(listas,200,cadastro.arq)!=NULL){ 
+
+	printf("%s",listas); //printf p imprimir a lista na tela
+
+}
+fclose(cadastro.arq);
+system("pause"); 
+system ("cls");
+}
+
+void buscar(){
+cadastro.arq = fopen("func.txt", "rb");
+
+
+printf("*-----------------------------------------------------------------------*\n");
+printf("|                       BUSCAR FUNCIONÁRIO                              |\n");
+printf("*-----------------------------------------------------------------------*\n\n\n ");
+printf("Por favor,informe o nome do funcionário que deseja buscar:\n");
+fflush(stdin);
+scanf("%s",cadastro.buscar);
+
+
+
+fclose(cadastro.arq);
+system("pause"); 
+system ("cls");
+}
+
+
+//void editar(){
+
+//}
+
+
+//void apagar(){
+
+//printf("*-----------------------------------------------------------------------*\n");
+//printf("|                        APAGAR CADASTRO                                |\n");
+//printf("*-----------------------------------------------------------------------*\n\n ");
+//printf("\n\n Digite o nome do funcionário que deseja apagar o cadastro: \n");
+
+
+
+
+
+//fclose(cadastro.arq);
+//system("pause");
+//system("cls");
+//}
+
+
+                                        //MENU PRINCIPAL
+int main(void){
+	
+	setlocale(LC_ALL,"Portuguese");
+	
+	
+	
+do{
+
+	printf("\n   *---------------CADASTRO DE FUNCIONÁRIOS------------------*");
+	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+	printf("\n   |                     MENU PRINCIPAL                      |");
+	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+	printf("\n   |         1-Cadastrar                                     |");
+	printf("\n   |         2-Exibir lista de funcionários                  |");
+	printf("\n   |         3-Buscar funcionário                            |");
+	printf("\n   |         4-Editar cadastro                               |");
+	printf("\n   |         5-Apagar cadastro                               |");
+	printf("\n   |         0-Encerrar sessão                               |");
+	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+ 	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+	printf("\n   |                                                         |");
+	printf("\n   | Programadora: Brenda Beato                              |");
+	printf("\n   *-------------------T.I ENTERPRISES-----------------------*");
+	printf("\n\n\n Por favor, digite uma opção:");
+	scanf("%d",&cadastro.opcao);
+	
+	
+	                          // ESTRUTURA SWITCH P/AS OPÇÕES DE CADASTRO
+	switch(cadastro.opcao){    
+		case 1:
+			printf(" Processando...");
+			Sleep(2000);
+			system("cls");
+			cadastrar();
+	    	break;
+	    case 2:
+	        printf(" Processando...");
+			Sleep(2000);
+			system("cls");
+			listar();
+	    	break;
+	    case 3:
+	        printf(" Processando...");
+			Sleep(2000);
+			system("cls");
+			buscar();
+	        break;
+	    //case 4:
+	        //printf(" Processando...");
+			//Sleep(2000);
+			//system("cls");
+			//editar();
+	        //break;
+	   // case 5:
+	    	//printf(" Processando...");
+			//Sleep(2000);
+			//system("cls");
+			//apagar();
+	    case 0:
+	        
+	        break;
+	                		
+	    default:
+	        printf("\n\n [!]ERRO [!]");                      //MENSAGEM DE ERRO PADRÃO
+	    	printf("\n Desculpe,opção inválida.");
+	}
+	
+                                                               
+   }while(cadastro.opcao!=0);
+   printf(" Processando...");
+   Sleep(1000);
+   printf("\n-------------VOLTE SEMPRE!!---------------"); //MENSAGEM DE SAÍDA DO PROGRAMA
